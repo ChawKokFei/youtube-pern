@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
+import EditTodo from "./EditTodo";
+
 //useEffect is going to make a fetch request to
 //the restful api every time this component is rendered
 const ListTodos = () => {
@@ -10,7 +12,7 @@ const ListTodos = () => {
   const deleteTodo = async (id) => {
     try {
       const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
       });
 
       //filter set a condition where it will only return
@@ -54,7 +56,9 @@ const ListTodos = () => {
             //assign the key to each row
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
-              <td>Edit</td>
+              <td>
+                <EditTodo todo={todo}/>
+              </td>
               <td>
                 <button
                   className="btn btn-danger"
